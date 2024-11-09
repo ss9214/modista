@@ -64,7 +64,34 @@ class LoginScreen extends StatelessWidget {
         body:  Center(
           child: Column(children: [
             Text("Login Here"),
-            Text("Nav works!!!")
+            Text("Nav works!!!"),
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: ElevatedButton(onPressed: (){
+                Navigator.push(
+                  ctxt,
+                  MaterialPageRoute(builder: (ctxt) => MuseHome()),
+                );
+              }, child: const Text('Check Login'))
+            )
+          ],),
+        ),
+    );
+  }
+}
+
+class MuseHome extends StatelessWidget { 
+  @override
+  Widget build(BuildContext ctxt) {
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Modista"),
+        ),
+        body:  Center(
+          child: Column(children: [
+            Text("Modistas:"),
+            
           ],),
         ),
     );
@@ -168,11 +195,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         
       ),
+      /*
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),*/ // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
