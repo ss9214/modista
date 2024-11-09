@@ -54,7 +54,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class SecondScreen extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext ctxt) {
     return new Scaffold(
@@ -63,8 +63,24 @@ class SecondScreen extends StatelessWidget {
         ),
         body:  Center(
           child: Column(children: [
-            Text("You have reached the second screen"),
+            Text("Login Here"),
             Text("Nav works!!!")
+          ],),
+        ),
+    );
+  }
+}
+
+class SignUpScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext ctxt) {
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Signup Here"),
+        ),
+        body:  Center(
+          child: Column(children: [
+            Text("Sign in here"),
           ],),
         ),
     );
@@ -122,22 +138,31 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                ":/ Your computer has restarted due to an error",
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
             ),
             Spacer(),
             Padding(
-              padding: EdgeInsets.all(100.0),
+              padding: EdgeInsets.only(bottom: 10.0),
               child: ElevatedButton(onPressed: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SecondScreen()),
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
                 );
               }, child: const Text("Login")),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 50.0),
+              child: ElevatedButton(onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUpScreen()),
+                );
+              }, child: const Text("Sign Up")),
             ),
           ],
         ),
