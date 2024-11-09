@@ -131,12 +131,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Spacer(),
             Padding(
-            ElevatedButton(onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SecondScreen()),
-              );
-            }, child: const Text("Login")),),
+              padding: EdgeInsets.all(100.0),
+              child: ElevatedButton(onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SecondScreen()),
+                );
+              }, child: const Text("Login")),
+            ),
           ],
         ),
         
