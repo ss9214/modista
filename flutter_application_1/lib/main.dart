@@ -11,10 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Modista',
       theme: ThemeData(
         // This is the theme of your application.
-        //
+        // test
         // TRY THIS: Try running your application with "flutter run". You'll see
         // the application has a purple toolbar. Then, without quitting the app,
         // try changing the seedColor in the colorScheme below to Colors.green
@@ -28,10 +28,10 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 241, 228, 189)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Modista'),
     );
   }
 }
@@ -52,6 +52,23 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext ctxt) {
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Multi Page Application Page - 1"),
+        ),
+        body:  Center(
+          child: Column(children: [
+            Text("You have reached the second screen"),
+            Text("Nav works!!!")
+          ],),
+        ),
+    );
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -103,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             const Text(
               'You have pushed the button this many times:',
@@ -112,8 +129,17 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            Spacer(),
+            Padding(
+            ElevatedButton(onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SecondScreen()),
+              );
+            }, child: const Text("Login")),),
           ],
         ),
+        
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
