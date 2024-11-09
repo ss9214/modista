@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 241, 228, 189)),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 241, 228, 189)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Modista'),
@@ -57,45 +58,86 @@ class MyHomePage extends StatefulWidget {
 }
 
 class LoginScreen extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+
   @override
+  Future<Map<String, dynamic>> checkUser(email) async {
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:8000/api/get_users/'),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({"email": email}),
+    );
+
+    if (response.statusCode == 200) {
+      final result = json.decode(response.body);
+      return {
+        "userExists": result['data'],
+        "userName": result['user'],
+      };
+    } else {
+      throw Exception('Failed to check user existence');
+    }
+  }
+
   Widget build(BuildContext ctxt) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Multi Page Application Page - 1"),
-        ),
-        body:  Center(
-          child: Column(children: [
+      appBar: new AppBar(
+        title: new Text("Multi Page Application Page - 1"),
+      ),
+      body: Center(
+        child: Column(
+          children: [
             Text("Login Here"),
-            Text("Nav works!!!"),
-            Spacer(),
             Padding(
               padding: EdgeInsets.all(10.0),
-              child: ElevatedButton(onPressed: (){
-                Navigator.push(
-                  ctxt,
-                  MaterialPageRoute(builder: (ctxt) => MuseHome()),
-                );
-              }, child: const Text('Check Login'))
-            )
-          ],),
+              child: TextField(
+                controller: emailController,
+                decoration: InputDecoration(labelText: "Email"),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: ElevatedButton(
+                onPressed: () async {
+                  String email = emailController.text;
+                  Map<String, dynamic> response = await checkUser(email);
+                  bool userExists = response['userExists'];
+                  if (userExists) {
+                    ScaffoldMessenger.of(ctxt).showSnackBar(
+                      SnackBar(content: Text('User exists!')),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(ctxt).showSnackBar(
+                      SnackBar(
+                          content: Text('User does not exist, go to signup')),
+                    );
+                    // Proceed with signup
+                  }
+                },
+                child: Text('Check if User Exists'),
+              ),
+            ),
+          ],
         ),
+      ),
     );
   }
 }
 
-class MuseHome extends StatelessWidget { 
+class MuseHome extends StatelessWidget {
   @override
   Widget build(BuildContext ctxt) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Modista"),
-        ),
-        body:  Center(
-          child: Column(children: [
+      appBar: new AppBar(
+        title: new Text("Modista"),
+      ),
+      body: Center(
+        child: Column(
+          children: [
             Text("Modistas:"),
-            
-          ],),
+          ],
         ),
+      ),
     );
   }
 }
@@ -104,14 +146,16 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext ctxt) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Signup Here"),
-        ),
-        body:  Center(
-          child: Column(children: [
+      appBar: new AppBar(
+        title: new Text("Signup Here"),
+      ),
+      body: Center(
+        child: Column(
+          children: [
             Text("Sign in here"),
-          ],),
+          ],
         ),
+      ),
     );
   }
 }
@@ -177,25 +221,28 @@ class _MyHomePageState extends State<MyHomePage> {
             Spacer(),
             Padding(
               padding: EdgeInsets.only(bottom: 10.0),
-              child: ElevatedButton(onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                );
-              }, child: const Text("Login")),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
+                  },
+                  child: const Text("Login")),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 50.0),
-              child: ElevatedButton(onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignUpScreen()),
-                );
-              }, child: const Text("Sign Up")),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUpScreen()),
+                    );
+                  },
+                  child: const Text("Sign Up")),
             ),
           ],
         ),
-        
       ),
       /*
       floatingActionButton: FloatingActionButton(
