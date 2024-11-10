@@ -18,11 +18,31 @@ def check_user():
         response = {"data": True,"user":"Modist"}
     else:
         response = {"data": False,"user":"None"}
-
     print(response)
     return jsonify(response)
 
-@app.route("/")
+@app.route("/api/post/create-user/",methods=['POST'])
+def create_user():
+    data = request.get_json()
+    database = client["modistdb"]
+    if data["user"] == "muse":
+        del data["user"]
+        database["muses"].insert_one(data)
+    else:
+        del data["user"]
+        database["modists"].insert_one(data)
+
+@app.route("/api/post/make-order/",methods=['POST'])
+def make_order():
+    data = request.get_json()
+    database = client["modistdb"]
+    orders_collection = database["orders"]
+    orders = orders_collection.find({}).sort("style_id",-1).limit(1)
+    for order in orders:
+        next_id = order["style_id"] + 1
+    orders_collection.insert_one({"style_id":next_id,"modist":data["modist"],"muse":data["muse"],"price":data["price"]})
+    
+
 def test():
     return "test"
 
