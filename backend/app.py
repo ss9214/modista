@@ -6,17 +6,15 @@ from mongoclient import client
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-@app.route("/api/post/check-user",methods=['POST'])
+@app.route("/api/post/check-user/", methods=['POST'])
 def check_user():
-    email = "sriharisriva@umass.edu"
+    email = request.get_json()["email"]
     database = client["modistdb"]
     modists = database["modists"]
-    modists = [modist for modist in modists.find({})]
     muses = database["muses"]
-    muses = [muse for muse in muses.find({})]
-    if email in muses['email']:
+    if muses.find({"email":email}):
         response = {"data": True,"user":"Muse"}
-    elif email in modists['email']:
+    elif modists.find({"email":email}):
         response = {"data": True,"user":"Modist"}
     else:
         response = {"data": False,"user":"None"}
