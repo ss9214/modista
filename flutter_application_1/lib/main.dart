@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 
 Map<String, dynamic> signupInfo = {};
 
@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Future<Map<String, dynamic>> checkUser(email) async {
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:5000/api/post/check-user/'),
+      Uri.parse('http://127.0.0.1:5000/api/post/check-user/'),
       headers: {"Content-Type": "application/json"},
       body: json.encode({"email": email}),
     );
@@ -141,66 +141,6 @@ class ModistaDesc extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctxt) {
-    
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("MODISTA"),
-        ),
-        body: Center(
-          child: Padding(
-            padding: EdgeInsets.all(15),
-            child: Column(
-              mainAxisSize: MainAxisSize
-                  .min, // Make the column take up only as much space as it needs
-              children: [
-                Text("MODISTA"),
-                Container(
-                  width: 300,
-                  height: 400,
-                  child: ListView(
-                    scrollDirection:
-                        Axis.horizontal, // Horizontal scroll direction
-                    children: [
-                      // Each image inside the ListView should have a defined width and height
-                      Container(
-                        width: 150, // Set width for the image
-                        child: Image.asset(
-                            'assets/images/zara_leather_jacket.png',
-                            fit: BoxFit.cover),
-                      ),
-                      Container(
-                        width: 150, // Set width for the image
-                        child: Image.asset('assets/images/npf_blue.png',
-                            fit: BoxFit.cover),
-                      ),
-                      Container(
-                        width: 150, // Set width for the image
-                        child: Image.asset('assets/images/ab_jeans.png',
-                            fit: BoxFit.cover),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20), // Space between ListView and profile text
-                Text(username + "'s profile", style: TextStyle(fontSize: 30)),
-                Spacer(), // This ensures the button stays at the bottom
-                Padding(
-                  padding: EdgeInsets.only(bottom: 10.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        ctxt,
-                        MaterialPageRoute(builder: (ctxt) => MuseHome()),
-                      );
-                    },
-                    child: const Text("Signup"),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
-    
     return Scaffold(
       appBar: AppBar(
         title: Text("MODISTA", 
@@ -441,10 +381,11 @@ class _MuseHomeState extends State<MuseHome> {
 
 class SignUpEmail extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
+
   @override
   Future<Map<String, dynamic>> checkUser(email) async {
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:5000/api/post/check-user/'),
+      Uri.parse('http://127.0.0.1:5000/api/post/check-user/'),
       headers: {"Content-Type": "application/json"},
       body: json.encode({"email": email}),
     );
@@ -476,19 +417,9 @@ class SignUpEmail extends StatelessWidget {
             Text("Sign up here"),
             Row(
               children: [
-                Expanded(
-                  child: TextField(
-                    controller: fname,
-                    decoration: InputDecoration(labelText: "First Name"),
-                  ),
-                ),
-                Expanded(
-                  child: TextField(
-                    controller: lname,
-                    decoration: InputDecoration(labelText: "Surname"),
-                  ),
-                ),
+                
               ],
+            ),
             Text("Enter your email to proceed"),
             Padding(
               padding: EdgeInsets.all(10.0),
@@ -510,6 +441,9 @@ class SignUpEmail extends StatelessWidget {
                     );
                   } else {
                     signupInfo["email"] = email;
+                    ScaffoldMessenger.of(ctxt).showSnackBar(
+                      SnackBar(content: Text('User does not exist')),
+                    );
                     // Proceed with signup
                     Navigator.push(
                       ctxt,
@@ -546,7 +480,7 @@ class MuseOrModistSignUp extends StatelessWidget {
                   // Proceed with signup
                   Navigator.push(
                     ctxt,
-                    MaterialPageRoute(builder: (ctxt) => SignUpInfo()),
+                    MaterialPageRoute(builder: (ctxt) => SignUpInfo(isMuse: "isMuse")),
                   );
                 },
                 child: Text('Muse'),
@@ -560,7 +494,7 @@ class MuseOrModistSignUp extends StatelessWidget {
                   // Proceed with signup
                   Navigator.push(
                     ctxt,
-                    MaterialPageRoute(builder: (ctxt) => SignUpInfo()),
+                    MaterialPageRoute(builder: (ctxt) => SignUpInfo(isMuse: signupInfo["user"])),
                   );
                 },
                 child: Text('Modist'),
@@ -574,7 +508,9 @@ class MuseOrModistSignUp extends StatelessWidget {
 }
 
 class SignUpInfo extends StatefulWidget {
-  @override
+  final String isMuse;
+  SignUpInfo({required this.isMuse});
+  
   _SignUpInfoState createState() => _SignUpInfoState();
 }
 
@@ -585,27 +521,28 @@ class _SignUpInfoState extends State<SignUpInfo> {
   final TextEditingController bio = TextEditingController();
   final TextEditingController pinterest = TextEditingController();
   final TextEditingController instagram = TextEditingController();
-  List<XFile>? wardrobeImages;
-  List<XFile>? stylePicsImages;
-  final ImagePicker _picker = ImagePicker();
 
-  Future<void> _pickWardrobeImages() async {
-    final List<XFile>? selectedImages = await _picker.pickMultiImage();
-    if (selectedImages != null) {
-      setState(() {
-        wardrobeImages = selectedImages;
-      });
-    }
-  }
+  // List<XFile>? wardrobeImages;
+  // List<XFile>? stylePicsImages;
+  // final ImagePicker _picker = ImagePicker();
 
-  Future<void> _pickStylePicsImages() async {
-    final List<XFile>? selectedImages = await _picker.pickMultiImage();
-    if (selectedImages != null) {
-      setState(() {
-        stylePicsImages = selectedImages;
-      });
-    }
-  }
+  // Future<void> _pickWardrobeImages() async {
+  //   final List<XFile>? selectedImages = await _picker.pickMultiImage();
+  //   if (selectedImages != null) {
+  //     setState(() {
+  //       wardrobeImages = selectedImages;
+  //     });
+  //   }
+  // }
+
+  // Future<void> _pickStylePicsImages() async {
+  //   final List<XFile>? selectedImages = await _picker.pickMultiImage();
+  //   if (selectedImages != null) {
+  //     setState(() {
+  //       stylePicsImages = selectedImages;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext ctxt) {
@@ -630,51 +567,65 @@ class _SignUpInfoState extends State<SignUpInfo> {
                 controller: style_categories,
                 decoration: InputDecoration(labelText: "Style Categories"),
               ),
-              TextField(
-                controller: bio,
-                decoration: InputDecoration(labelText: "Bio"),
-              ),
-              TextField(
-                controller: pinterest,
-                decoration: InputDecoration(labelText: "Pinterest"),
-              ),
-              TextField(
-                controller: instagram,
-                decoration: InputDecoration(labelText: "Instagram"),
-              ),
-              SizedBox(height: 10),
+              Column(
+                children: [
+                  if (isMuse != "muse") ...[
+                    TextField(
+                      controller: bio,
+                      decoration: InputDecoration(labelText: "Bio"),
+                    ),
+                    TextField(
+                      controller: pinterest,
+                      decoration: InputDecoration(labelText: "Pinterest"),
+                    ),
+                    TextField(
+                      controller: instagram,
+                      decoration: InputDecoration(labelText: "Instagram"),
+                    ),
+                    SizedBox(height: 10),
+                    ElevatedButton(onPressed: (){
+                      Navigator.push(
+                        ctxt, 
+                        MaterialPageRoute(builder: (ctxt) => MuseHome())
+                      );
+                    }, child: const Text("All done")
+                    ),
+                  ],
+                ],
+                  // Add any other widgets here that are outside of the conditional block
+              )
 
               // Wardrobe Images Uploader
-              ElevatedButton(
-                onPressed: _pickWardrobeImages,
-                child: Text("Upload Wardrobe Images"),
-              ),
-              wardrobeImages != null
-                  ? Wrap(
-                      spacing: 10,
-                      children: wardrobeImages!.map((file) {
-                        return Image.file(File(file.path),
-                            width: 100, height: 100);
-                      }).toList(),
-                    )
-                  : Text("No wardrobe images selected"),
+              // ElevatedButton(
+              //   onPressed: _pickWardrobeImages,
+              //   child: Text("Upload Wardrobe Images"),
+              // ),
+              // wardrobeImages != null
+              //     ? Wrap(
+              //         spacing: 10,
+              //         children: wardrobeImages!.map((file) {
+              //           return Image.file(File(file.path),
+              //               width: 100, height: 100);
+              //         }).toList(),
+              //       )
+              //     : Text("No wardrobe images selected"),
 
-              SizedBox(height: 10),
+              // SizedBox(height: 10),
 
               // Style Pics Images Uploader
-              ElevatedButton(
-                onPressed: _pickStylePicsImages,
-                child: Text("Upload Style Pics Images"),
-              ),
-              stylePicsImages != null
-                  ? Wrap(
-                      spacing: 10,
-                      children: stylePicsImages!.map((file) {
-                        return Image.file(File(file.path),
-                            width: 100, height: 100);
-                      }).toList(),
-                    )
-                  : Text("No style pics images selected"),
+              // ElevatedButton(
+              //   onPressed: _pickStylePicsImages,
+              //   child: Text("Upload Style Pics Images"),
+              // ),
+              // stylePicsImages != null
+              //     ? Wrap(
+              //         spacing: 10,
+              //         children: stylePicsImages!.map((file) {
+              //           return Image.file(File(file.path),
+              //               width: 100, height: 100);
+              //         }).toList(),
+              //       )
+              //     : Text("No style pics images selected"),
             ],
           ),
         ),
