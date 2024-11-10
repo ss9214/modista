@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Modista',
+      title: 'MODISTA',
       theme: ThemeData(
         // This is the theme of your application.
         // test
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 241, 228, 189)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Modista'),
+      home: const MyHomePage(title: 'MODISTA'),
     );
   }
 }
@@ -82,7 +82,11 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext ctxt) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Multi Page Application Page - 1"),
+        title: Text("MODISTA", 
+          style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,),
+        ),
       ),
       body: Center(
         child: Column(
@@ -135,7 +139,11 @@ class ModistaDesc extends StatelessWidget {
   Widget build(BuildContext ctxt) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("MODISTA"),
+        title: Text("MODISTA", 
+          style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,),
+        ),
       ),
       body: Center(
         child: Padding(
@@ -199,7 +207,11 @@ class AIStylist extends StatelessWidget {
   Widget build(BuildContext ctxt) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("MODISTA"),
+        title: Text("MODISTA", 
+          style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,),
+        ),
       ),
       body: Center(
         child: Padding(
@@ -242,7 +254,11 @@ class _MuseHomeState extends State<MuseHome> {
   Widget build(BuildContext ctxt) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Modista"),
+        title: Text("MODISTA", 
+          style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,),
+        ),
       ),
       body: Center(
         child: Column(
@@ -271,7 +287,7 @@ class _MuseHomeState extends State<MuseHome> {
                       child: Container(
                         width: 200,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 222, 245, 255),
+                          color: Color.fromARGB(255, 248, 248, 248),
                           border: Border.all(
                             color: Colors.black,
                             width: 4,
@@ -317,7 +333,7 @@ class _MuseHomeState extends State<MuseHome> {
                       child: Container(
                         width: 200,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 222, 245, 255),
+                          color: Color.fromARGB(255, 248, 248, 248),
                           border: Border.all(
                             color: Colors.black,
                             width: 4,
@@ -367,12 +383,16 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext ctxt) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Signup Here"),
+        title: Text("MODISTA", 
+          style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,),
+        ),
       ),
       body: Center(
         child: Column(
           children: [
-            Text("Sign in here"),
+            Text("Sign up here"),
             Row(
               children: [
                 Expanded(
@@ -439,7 +459,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text("MODISTA"),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
