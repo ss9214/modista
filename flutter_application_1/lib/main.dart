@@ -132,9 +132,12 @@ class LoginScreen extends StatelessWidget {
 //MODISTA DESCRIPTION
 class ModistaDesc extends StatelessWidget {
   final String username;
-  @override
+
   ModistaDesc({required this.username});
+
+  @override
   Widget build(BuildContext ctxt) {
+    
     return new Scaffold(
         appBar: new AppBar(
           title: new Text("MODISTA"),
@@ -193,8 +196,105 @@ class ModistaDesc extends StatelessWidget {
             ),
           ),
         ));
+    
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("MODISTA"),
+      ),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            children: [
+              Text("MODISTA"),
+              SizedBox(height: 20),
+              Image.asset(
+                'assets/images/zara_leather_jacket.png',
+                width: 100,
+                height: 100,
+              ),
+              SizedBox(height: 20),
+              Image.asset(
+                'assets/images/nfp_blue.png',
+                width: 100,
+                height: 100,
+              ),
+              SizedBox(height: 20),
+              Text('$username\'s profile', style: TextStyle(fontSize: 30)),
+              Spacer(),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                  ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      ctxt,
+                      MaterialPageRoute(builder: (ctxt) => AIStylist(username: username)),
+                    );
+                  },
+                  child: Text('AI Stylist'), // Move `child` here, outside of `onPressed`
+                  ),
+                  ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      ctxt,
+                      MaterialPageRoute(builder: (ctxt) => AIStylist(username: username)),
+                    );
+                  }, child: Text('Personal Stylist'),
+                  ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
+
+class AIStylist extends StatelessWidget {
+  final String username;
+
+  AIStylist({required this.username});
+
+  @override
+  Widget build(BuildContext ctxt) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("MODISTA"),
+      ),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            children: [
+              Text("Have the AI Style your wardrobe."),
+              SizedBox(height: 20),
+              Image.asset(
+                'assets/images/zara_leather_jacket.png',
+                width: 100,
+                height: 100,
+              ),
+              SizedBox(height: 20),
+              Image.asset(
+                'assets/images/nfp_blue.png',
+                width: 100,
+                height: 100,
+              ),
+              SizedBox(height: 20),
+              Text('$username\'s profile', style: TextStyle(fontSize: 30)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
 
 class MuseHome extends StatefulWidget {
   @override
@@ -227,7 +327,6 @@ class _MuseHomeState extends State<MuseHome> {
                           MaterialPageRoute(
                             builder: (ctxt) => ModistaDesc(
                               // You can pass any data you need to ModistaDesc here
-                              //itemName: 'Zara Leather Jacket & Mens Pants',
                               username: 'usr345689',
                             ),
                           ),
@@ -274,7 +373,6 @@ class _MuseHomeState extends State<MuseHome> {
                           ctxt,
                           MaterialPageRoute(
                             builder: (ctxt) => ModistaDesc(
-                              //itemName: 'NFP Blue & AB Jeans',
                               username: 'usr57899',
                             ),
                           ),
