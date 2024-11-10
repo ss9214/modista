@@ -128,65 +128,109 @@ class LoginScreen extends StatelessWidget {
 //MODISTA DESCRIPTION
 class ModistaDesc extends StatelessWidget {
   final String username;
-  @override
+
   ModistaDesc({required this.username});
+
+  @override
   Widget build(BuildContext ctxt) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("MODISTA"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("MODISTA"),
       ),
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(15),
           child: Column(
-            mainAxisSize: MainAxisSize.min, // Make the column take up only as much space as it needs
             children: [
               Text("MODISTA"),
-              Container(
-                width: 300,
-                height: 400,
-                child: ListView(
-                  scrollDirection: Axis.horizontal, // Horizontal scroll direction
-                  children: [
-                    // Each image inside the ListView should have a defined width and height
-                    Container(
-                      width: 150, // Set width for the image
-                      child: Image.asset('assets/images/zara_leather_jacket.png', fit: BoxFit.cover),
-                    ),
-                    Container(
-                      width: 150, // Set width for the image
-                      child: Image.asset('assets/images/npf_blue.png', fit: BoxFit.cover),
-                    ),
-                    Container(
-                      width: 150, // Set width for the image
-                      child: Image.asset('assets/images/ab_jeans.png', fit: BoxFit.cover),
-                    ),
-                  ],
-                ),
+              SizedBox(height: 20),
+              Image.asset(
+                'assets/images/zara_leather_jacket.png',
+                width: 100,
+                height: 100,
               ),
-              SizedBox(height: 20), // Space between ListView and profile text
-              Text(username + "'s profile", style: TextStyle(fontSize: 30)),
-              Spacer(), // This ensures the button stays at the bottom
+              SizedBox(height: 20),
+              Image.asset(
+                'assets/images/nfp_blue.png',
+                width: 100,
+                height: 100,
+              ),
+              SizedBox(height: 20),
+              Text('$username\'s profile', style: TextStyle(fontSize: 30)),
+              Spacer(),
               Padding(
-                padding: EdgeInsets.only(bottom: 10.0),
-                child: ElevatedButton(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                  ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       ctxt,
-                      MaterialPageRoute(builder: (ctxt) => MuseHome()),
+                      MaterialPageRoute(builder: (ctxt) => AIStylist(username: username)),
                     );
                   },
-                  child: const Text("Signup"),
+                  child: Text('AI Stylist'), // Move `child` here, outside of `onPressed`
+                  ),
+                  ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      ctxt,
+                      MaterialPageRoute(builder: (ctxt) => AIStylist(username: username)),
+                    );
+                  }, child: Text('Personal Stylist'),
+                  ),
+                  ],
                 ),
-              ),
+              )
             ],
           ),
         ),
-      )
-
+      ),
     );
   }
 }
+
+class AIStylist extends StatelessWidget {
+  final String username;
+
+  AIStylist({required this.username});
+
+  @override
+  Widget build(BuildContext ctxt) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("MODISTA"),
+      ),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            children: [
+              Text("Have the AI Style your wardrobe."),
+              SizedBox(height: 20),
+              Image.asset(
+                'assets/images/zara_leather_jacket.png',
+                width: 100,
+                height: 100,
+              ),
+              SizedBox(height: 20),
+              Image.asset(
+                'assets/images/nfp_blue.png',
+                width: 100,
+                height: 100,
+              ),
+              SizedBox(height: 20),
+              Text('$username\'s profile', style: TextStyle(fontSize: 30)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
 
 class MuseHome extends StatefulWidget {
   @override
@@ -219,7 +263,6 @@ class _MuseHomeState extends State<MuseHome> {
                           MaterialPageRoute(
                             builder: (ctxt) => ModistaDesc(
                               // You can pass any data you need to ModistaDesc here
-                              //itemName: 'Zara Leather Jacket & Mens Pants',
                               username: 'usr345689',
                             ),
                           ),
@@ -266,7 +309,6 @@ class _MuseHomeState extends State<MuseHome> {
                           ctxt,
                           MaterialPageRoute(
                             builder: (ctxt) => ModistaDesc(
-                              //itemName: 'NFP Blue & AB Jeans',
                               username: 'usr57899',
                             ),
                           ),
