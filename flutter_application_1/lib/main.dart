@@ -7,7 +7,6 @@ import 'dart:io';
 
 
 Map<String, dynamic> signupInfo = {};
-
 void main() {
   runApp(const MyApp());
 }
@@ -125,7 +124,7 @@ class LoginScreen extends StatelessWidget {
                     // Proceed with signup
                   }
                 },
-                child: Text('Check if User Exists'),
+                child: Text('Login'),
               ),
             ),
           ],
@@ -136,12 +135,38 @@ class LoginScreen extends StatelessWidget {
 }
 
 //MODISTA DESCRIPTION
-class ModistaDesc extends StatelessWidget {
+class ModistaDesc extends StatefulWidget {
   final String username;
 
   ModistaDesc({required this.username});
 
   @override
+  _ModistaDescState createState() => _ModistaDescState();
+}
+
+class _ModistaDescState extends State<ModistaDesc> {
+  dynamic modist;
+  
+  @override
+  // void initState() {
+  //   super.initState();
+  //   findModist(widget.username);
+  // }
+
+  Future<dynamic>findModist(username) async {
+    final response = await http.get(
+      Uri.parse('http://127.0.0.1:5000/api/post/modist'),
+    );
+
+    if (response.statusCode == 200) {
+      final result = json.decode(response.body);
+      setState(() {
+        modist = result["Modist"];
+      });
+    } else {
+      throw Exception('Failed to find modist');
+    }
+  }
   Widget build(BuildContext ctxt) {
     return Scaffold(
       appBar: AppBar(
@@ -165,12 +190,13 @@ class ModistaDesc extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Image.asset(
-                'assets/images/nfp_blue.png',
+                'assets/images/zara_mens_pants.png',
                 width: 100,
                 height: 100,
               ),
               SizedBox(height: 20),
-              Text('$username\'s profile', style: TextStyle(fontSize: 30)),
+              Text("sriharisriva's profile", style: TextStyle(fontSize: 30)),
+              Text("Srihari Srivatsa"),
               Spacer(),
               Padding(
                 padding: EdgeInsets.all(20),
@@ -180,7 +206,7 @@ class ModistaDesc extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       ctxt,
-                      MaterialPageRoute(builder: (ctxt) => AIStylist(username: username)),
+                      MaterialPageRoute(builder: (ctxt) => AIStylist(username: "sriharisriva")),
                     );
                   },
                   child: Text('AI Stylist'), // Move `child` here, outside of `onPressed`
@@ -189,9 +215,9 @@ class ModistaDesc extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       ctxt,
-                      MaterialPageRoute(builder: (ctxt) => AIStylist(username: username)),
+                      MaterialPageRoute(builder: (ctxt) => MakeAnOrder(username: "sriharisriva")),
                     );
-                  }, child: Text('Personal Stylist'),
+                  }, child: Text('Make an Order'),
                   ),
                   ],
                 ),
@@ -203,6 +229,90 @@ class ModistaDesc extends StatelessWidget {
     );
   }
 }
+
+class MakeAnOrder extends StatelessWidget {
+  final TextEditingController textfield = TextEditingController();//budget
+  final TextEditingController textfield2 = TextEditingController();//style
+  final TextEditingController textfield3 = TextEditingController();
+  final String username;
+
+  
+  //checkbox
+  @override
+  MakeAnOrder({required this.username});
+
+  void makeOrder(data) async {
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:5000/api/post/make-order/'),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode(data),
+    );
+  }
+
+
+  Widget build(BuildContext ctxt) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("MODISTA", 
+          style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,),
+        ),
+      ),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(children: [
+            TextField(
+              controller: textfield,
+              decoration: InputDecoration(labelText: "How much are you willing to pay?"),
+            ),
+            TextField(
+              controller: textfield2,
+              decoration: InputDecoration(labelText: "List your favorite styles"),
+            ),
+            TextField(
+              controller: textfield3,
+              decoration: InputDecoration(labelText: "By proceeding, you are consenting to giving us pictures of your wardrobe. Type YES to confirm."),
+            ),
+
+              ElevatedButton(
+                onPressed: () {
+                  if (textfield3.text == "YES") {
+  showDialog(
+    context: ctxt,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Order Confirmation"),
+        content: Text("Your order has been placed. You will receive an email shortly."),
+        actions: [
+          TextButton(
+            onPressed: () {
+              makeOrder({"modist":"sriharisriva","muse":"siddishczar","price":textfield.text,"styles":textfield2.text});
+              Navigator.of(context).pop(); // Close the dialog
+              Navigator.push(
+                ctxt,
+                MaterialPageRoute(builder: (ctxt) => MyHomePage(title: "MODISTA")),
+              );
+            },
+            child: Text("OK"),
+          ),
+        ],
+      );
+    },
+  );
+}
+                },
+                child: Text("Submit Order"),
+              ),
+            
+          ],)
+        )
+      )
+    );
+  }
+}
+
 
 class AIStylist extends StatelessWidget {
   final String username;
@@ -238,7 +348,7 @@ class AIStylist extends StatelessWidget {
                 height: 100,
               ),
               SizedBox(height: 20),
-              Text('$username\'s profile', style: TextStyle(fontSize: 30)),
+              Text("sriharisriva's profile", style: TextStyle(fontSize: 30)),
             ],
           ),
         ),
@@ -247,7 +357,52 @@ class AIStylist extends StatelessWidget {
   }
 }
 
-
+class GlobalSidebar extends StatelessWidget {
+  @override
+  Widget build(BuildContext ctxt) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text(
+              'App Name',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Log out'),
+            onTap: () {
+              Navigator.push(
+                      ctxt,
+                      MaterialPageRoute(
+                          builder: (ctxt) => MyHomePage(title: 'MODISTA')),
+                    );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('My orders'),
+            onTap: () {
+              Navigator.push(
+                      ctxt,
+                      MaterialPageRoute(
+                          builder: (ctxt) => MyOrders()),
+                    );
+            },
+          )
+        ],
+      ),
+    );
+  }
+}
 
 
 class MuseHome extends StatefulWidget {
@@ -266,6 +421,7 @@ class _MuseHomeState extends State<MuseHome> {
           fontStyle: FontStyle.italic,),
         ),
       ),
+      drawer: GlobalSidebar(),
       body: Center(
         child: Column(
           children: [
@@ -285,7 +441,7 @@ class _MuseHomeState extends State<MuseHome> {
                           MaterialPageRoute(
                             builder: (ctxt) => ModistaDesc(
                               // You can pass any data you need to ModistaDesc here
-                              username: 'usr345689',
+                              username: 'sriharisriva',
                             ),
                           ),
                         );
@@ -317,7 +473,7 @@ class _MuseHomeState extends State<MuseHome> {
                       ),
                     ),
                     const Text(
-                      'By: usr345689',
+                      'By: sriharisriva',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -331,7 +487,7 @@ class _MuseHomeState extends State<MuseHome> {
                           ctxt,
                           MaterialPageRoute(
                             builder: (ctxt) => ModistaDesc(
-                              username: 'usr57899',
+                              username: 'sriharisriva',
                             ),
                           ),
                         );
@@ -363,7 +519,7 @@ class _MuseHomeState extends State<MuseHome> {
                       ),
                     ),
                     const Text(
-                      'By: usr57899',
+                      'By: sriharisriva',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -412,6 +568,7 @@ class SignUpEmail extends StatelessWidget {
           fontStyle: FontStyle.italic,),
         ),
       ),
+      drawer: GlobalSidebar(),
       body: Center(
         child: Column(
           children: [
@@ -464,6 +621,42 @@ class SignUpEmail extends StatelessWidget {
   }
 }
 
+class MyOrders extends StatelessWidget {
+  @override
+  Future<Map<String, dynamic>> getOrders() async {
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:5000/api/post/get-orders/'),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({"real_name": signupInfo["real_name"]}),
+    );
+
+    if (response.statusCode == 200) {
+      final result = json.decode(response.body);
+      return result;
+    } else {
+      throw Exception('Failed to check user existence');
+    }
+  }
+
+  final real_name = signupInfo["real_name"];
+  Widget build(BuildContext ctxt) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("$real_name's Orders"),
+      ),
+      drawer: GlobalSidebar(),
+      body: Center(
+        child: Column(
+          children: [
+            Text(''),
+            Text('')
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class MuseOrModistSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext ctxt) {
@@ -471,6 +664,7 @@ class MuseOrModistSignUp extends StatelessWidget {
       appBar: new AppBar(
         title: new Text("Signup Here"),
       ),
+      drawer: GlobalSidebar(),
       body: Center(
         child: Column(
           children: [
@@ -482,7 +676,7 @@ class MuseOrModistSignUp extends StatelessWidget {
                   // Proceed with signup
                   Navigator.push(
                     ctxt,
-                    MaterialPageRoute(builder: (ctxt) => SignUpInfo(isMuse: "isMuse")),
+                    MaterialPageRoute(builder: (ctxt) => SignUpInfo()),
                   );
                 },
                 child: Text('Muse'),
@@ -496,7 +690,7 @@ class MuseOrModistSignUp extends StatelessWidget {
                   // Proceed with signup
                   Navigator.push(
                     ctxt,
-                    MaterialPageRoute(builder: (ctxt) => SignUpInfo(isMuse: signupInfo["user"])),
+                    MaterialPageRoute(builder: (ctxt) => SignUpInfo()),
                   );
                 },
                 child: Text('Modist'),
@@ -509,14 +703,23 @@ class MuseOrModistSignUp extends StatelessWidget {
   }
 }
 
-class SignUpInfo extends StatefulWidget {
-  final String isMuse;
-  SignUpInfo({required this.isMuse});
-  
-  _SignUpInfoState createState() => _SignUpInfoState();
-}
+class SignUpInfo extends StatelessWidget {
 
-class _SignUpInfoState extends State<SignUpInfo> {
+  void createUser() async {
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:5000/api/post/create-user/'),
+      headers: {"Content-Type": "application/json"},
+      body: json.encode(signupInfo),
+    );
+    if (response.statusCode == 200) {
+        // Successfully sent the data
+        print('Signup successful');
+      } else {
+        // Handle errors from the server
+        print('Failed to send signup data. Status code: ${response.statusCode}');
+      }
+  }
+
   final TextEditingController username = TextEditingController();
   final TextEditingController real_name = TextEditingController();
   final TextEditingController style_categories = TextEditingController();
@@ -552,6 +755,7 @@ class _SignUpInfoState extends State<SignUpInfo> {
       appBar: new AppBar(
         title: new Text("Enter your information!"),
       ),
+      drawer: GlobalSidebar(),
       body: Center(
         child: Padding(
           padding: EdgeInsets.only(left: 10, right: 10),
@@ -565,13 +769,14 @@ class _SignUpInfoState extends State<SignUpInfo> {
                 controller: real_name,
                 decoration: InputDecoration(labelText: "Real Name"),
               ),
-              TextField(
-                controller: style_categories,
-                decoration: InputDecoration(labelText: "Style Categories"),
-              ),
+              
               Column(
                 children: [
-                  if (isMuse != "muse") ...[
+                  if (signupInfo["user"] != "muse") ...[
+                    TextField(
+                      controller: style_categories,
+                      decoration: InputDecoration(labelText: "Style Categories"),
+                    ),
                     TextField(
                       controller: bio,
                       decoration: InputDecoration(labelText: "Bio"),
@@ -584,15 +789,27 @@ class _SignUpInfoState extends State<SignUpInfo> {
                       controller: instagram,
                       decoration: InputDecoration(labelText: "Instagram"),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 10)
+                  ],
+                  
                     ElevatedButton(onPressed: (){
+                    if (signupInfo["user"] == "modist") {
+                      signupInfo["username"] = username.text;
+                      signupInfo["real_name"] = real_name.text;
+                      signupInfo["style_cateogires"] = style_categories.text;
+                      signupInfo["bio"] = bio.text;
+                      signupInfo["user_info"] = {"pinterest":pinterest.text,"instagram":instagram.text};
+                    } else {
+                      signupInfo["username"] = username.text;
+                      signupInfo["real_name"] = real_name.text;
+                    }
+                      createUser();
                       Navigator.push(
                         ctxt, 
                         MaterialPageRoute(builder: (ctxt) => MuseHome())
                       );
                     }, child: const Text("All done")
                     ),
-                  ],
                 ],
                   // Add any other widgets here that are outside of the conditional block
               )
@@ -630,12 +847,11 @@ class _SignUpInfoState extends State<SignUpInfo> {
               //               width: 100, height: 100);
               //         }).toList(),
               //       )
-              //     : Text("No style pics images selected"),
-            ],
+            ],  //     : Text("No style pics images selected"),
           ),
         ),
-      ),
-    );
+          ),
+        );
   }
 }
 

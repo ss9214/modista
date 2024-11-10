@@ -31,6 +31,7 @@ def create_user():
     else:
         del data["user"]
         database["modists"].insert_one(data)
+    return {'Success':True}
 
 @app.route("/api/post/make-order/",methods=['POST'])
 def make_order():
@@ -40,8 +41,18 @@ def make_order():
     orders = orders_collection.find({}).sort("style_id",-1).limit(1)
     for order in orders:
         next_id = order["style_id"] + 1
-    orders_collection.insert_one({"style_id":next_id,"modist":data["modist"],"muse":data["muse"],"price":data["price"]})
-    
+    orders_collection.insert_one({"style_id":next_id,"modist":data["modist"],"muse":data["muse"],"price":data["price"],"styles":data["styles"]})
+
+@app.route('/api/post/get-orders',methods=['POST'])
+def get_orders():
+    data = request.get_json()
+    name = data['real_name']
+    database = client["modistdb"]
+    orders_collection = database["orders"]
+    cursor = orders_collection.find({'muse':name})
+    orders = [order for order in cursor]
+    return {"Orders":orders}
+
 @app.route("/api/get/modist-list",methods=['GET'])
 def get_modists():
     database = client["modistdb"]
@@ -51,6 +62,14 @@ def get_modists():
     for modist in cursor:
         modists.append(modist)
     return {"Modists":modists}
+
+@app.route("/api/post/modist",methods=['POST'])
+def find_modist():
+    username = request.get_json()["username"]
+    database = client["modistdb"]
+    modists_collection = database["modists"]
+    modist = modists_collection.find_one({"username":username})
+    return {"Modist":modist}
 
 if __name__ == "__main__":
     app.run(debug=True,port=5000)

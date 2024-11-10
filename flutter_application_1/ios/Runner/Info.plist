@@ -45,11 +45,19 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+<<<<<<< HEAD
 	<key>NSPhotoLibraryUsageDescription</key>
+=======
+	<!-- <key>NSPhotoLibraryUsageDescription</key>
+>>>>>>> 1ca5620 (Added final features)
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
+<<<<<<< HEAD
 	<true/>
+=======
+	<true/> -->
+>>>>>>> 1ca5620 (Added final features)
 </dict>
 </plist>

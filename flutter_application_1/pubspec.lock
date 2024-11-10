@@ -41,6 +41,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+<<<<<<< HEAD
   cross_file:
     dependency: transitive
     description:
@@ -49,6 +50,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.4+2"
+=======
+>>>>>>> 1ca5620 (Added final features)
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -65,6 +68,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+<<<<<<< HEAD
   file_selector_linux:
     dependency: transitive
     description:
@@ -97,6 +101,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.3+3"
+=======
+>>>>>>> 1ca5620 (Added final features)
   flutter:
     dependency: "direct main"
     description: flutter
@@ -110,6 +116,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+<<<<<<< HEAD
   flutter_plugin_android_lifecycle:
     dependency: "direct main"
     description:
@@ -118,16 +125,21 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.23"
+=======
+>>>>>>> 1ca5620 (Added final features)
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   flutter_web_plugins:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
+=======
+>>>>>>> 1ca5620 (Added final features)
   http:
     dependency: "direct main"
     description:
@@ -144,6 +156,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+<<<<<<< HEAD
   image_picker:
     dependency: "direct main"
     description:
@@ -208,6 +221,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1+1"
+=======
+>>>>>>> 1ca5620 (Added final features)
   leak_tracker:
     dependency: transitive
     description:
@@ -264,6 +279,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
+<<<<<<< HEAD
   mime:
     dependency: transitive
     description:
@@ -272,6 +288,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+=======
+>>>>>>> 1ca5620 (Added final features)
   path:
     dependency: transitive
     description:
@@ -280,6 +298,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
+<<<<<<< HEAD
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -288,6 +307,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+=======
+>>>>>>> 1ca5620 (Added final features)
   sky_engine:
     dependency: transitive
     description: flutter
@@ -365,6 +386,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.2.5"
+<<<<<<< HEAD
   web:
     dependency: transitive
     description:
@@ -376,3 +398,8 @@ packages:
 sdks:
   dart: ">=3.5.4 <4.0.0"
   flutter: ">=3.24.0"
+=======
+sdks:
+  dart: ">=3.5.4 <4.0.0"
+  flutter: ">=3.18.0-18.0.pre.54"
+>>>>>>> 1ca5620 (Added final features)

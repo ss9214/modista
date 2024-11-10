@@ -1,6 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET"/>
+=======
+    <!-- <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/> -->
+>>>>>>> 1ca5620 (Added final features)
     <application
         android:label="flutter_application_1"
         android:name="${applicationName}"
