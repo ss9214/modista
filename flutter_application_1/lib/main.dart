@@ -124,17 +124,96 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class MuseHome extends StatelessWidget {
+class MuseHome extends StatefulWidget {
+  @override
+  _MuseHomeState createState() => _MuseHomeState();
+}
+
+class _MuseHomeState extends State<MuseHome> {
   @override
   Widget build(BuildContext ctxt) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Modista"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Modista"),
       ),
       body: Center(
         child: Column(
           children: [
-            Text("Modistas:"),
+            const Text("Modistas:"),
+            Container(
+              height: 717,
+              child: ListView(
+                children: [
+                  // First item in the horizontal listß
+                  Container(
+                    width: 200,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 222, 245, 255),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 4,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/zara_leather_jacket.png',
+                          width: 150,
+                          height: 150,
+                        ),
+                        Image.asset(
+                          'assets/images/zara_mens_pants.png',
+                          width: 150,
+                          height: 150,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Text(
+                    'By: usr345689',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Color.fromARGB(255, 45, 40, 40),
+                    ),
+                  ),
+                  Container(
+                    width: 200,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 222, 245, 255),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 4,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/nfp_blue.png',
+                          width: 150,
+                          height: 150,
+                        ),
+                        Image.asset(
+                          'assets/images/ab_jeans.png',
+                          width: 150,
+                          height: 150,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Text(
+                    'By: usr57899',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Color.fromARGB(255, 45, 40, 40),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -153,6 +232,18 @@ class SignUpScreen extends StatelessWidget {
         child: Column(
           children: [
             Text("Sign in here"),
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      ctxt,
+                      MaterialPageRoute(builder: (ctxt) => MuseHome()),
+                    );
+                  },
+                  child: const Text("Signup")),
+            ),
           ],
         ),
       ),
