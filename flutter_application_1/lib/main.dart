@@ -103,8 +103,9 @@ class LoginScreen extends StatelessWidget {
                   Map<String, dynamic> response = await checkUser(email);
                   bool userExists = response['userExists'];
                   if (userExists) {
-                    ScaffoldMessenger.of(ctxt).showSnackBar(
-                      SnackBar(content: Text('User exists!')),
+                    Navigator.push(
+                      ctxt,
+                      MaterialPageRoute(builder: (ctxt) => MuseHome()),
                     );
                   } else {
                     ScaffoldMessenger.of(ctxt).showSnackBar(
@@ -120,6 +121,69 @@ class LoginScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+//MODISTA DESCRIPTION
+class ModistaDesc extends StatelessWidget {
+  final String username;
+  @override
+  ModistaDesc({required this.username});
+  Widget build(BuildContext ctxt) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("MODISTA"),
+      ),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            mainAxisSize: MainAxisSize.min, // Make the column take up only as much space as it needs
+            children: [
+              Text("MODISTA"),
+              Container(
+                width: 300,
+                height: 400,
+                child: ListView(
+                  scrollDirection: Axis.horizontal, // Horizontal scroll direction
+                  children: [
+                    // Each image inside the ListView should have a defined width and height
+                    Container(
+                      width: 150, // Set width for the image
+                      child: Image.asset('assets/images/zara_leather_jacket.png', fit: BoxFit.cover),
+                    ),
+                    Container(
+                      width: 150, // Set width for the image
+                      child: Image.asset('assets/images/npf_blue.png', fit: BoxFit.cover),
+                    ),
+                    Container(
+                      width: 150, // Set width for the image
+                      child: Image.asset('assets/images/ab_jeans.png', fit: BoxFit.cover),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20), // Space between ListView and profile text
+              Text(username + "'s profile", style: TextStyle(fontSize: 30)),
+              Spacer(), // This ensures the button stays at the bottom
+              Padding(
+                padding: EdgeInsets.only(bottom: 10.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      ctxt,
+                      MaterialPageRoute(builder: (ctxt) => MuseHome()),
+                    );
+                  },
+                  child: const Text("Signup"),
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+
     );
   }
 }
@@ -140,78 +204,110 @@ class _MuseHomeState extends State<MuseHome> {
         child: Column(
           children: [
             const Text("Modistas:"),
-            Container(
-              height: 717,
-              child: ListView(
-                children: [
-                  // First item in the horizontal listß
-                  Container(
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 222, 245, 255),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 4,
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Container(
+                height: 677,
+                child: ListView(
+                  children: [
+                    // First item in the horizontal list
+                    GestureDetector(
+                      onTap: () {
+                        // Navigate to ModistaDesc screen when tapped
+                        Navigator.push(
+                          ctxt,
+                          MaterialPageRoute(
+                            builder: (ctxt) => ModistaDesc(
+                              // You can pass any data you need to ModistaDesc here
+                              //itemName: 'Zara Leather Jacket & Mens Pants',
+                              username: 'usr345689',
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 200,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 222, 245, 255),
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 4,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/images/zara_leather_jacket.png',
+                              width: 150,
+                              height: 150,
+                            ),
+                            Image.asset(
+                              'assets/images/zara_mens_pants.png',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ],
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'assets/images/zara_leather_jacket.png',
-                          width: 150,
-                          height: 150,
-                        ),
-                        Image.asset(
-                          'assets/images/zara_mens_pants.png',
-                          width: 150,
-                          height: 150,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Text(
-                    'By: usr345689',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Color.fromARGB(255, 45, 40, 40),
-                    ),
-                  ),
-                  Container(
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 222, 245, 255),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 4,
+                    const Text(
+                      'By: usr345689',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 45, 40, 40),
                       ),
-                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'assets/images/nfp_blue.png',
-                          width: 150,
-                          height: 150,
+                    GestureDetector(
+                      onTap: () {
+                        // Navigate to ModistaDesc screen when tapped
+                        Navigator.push(
+                          ctxt,
+                          MaterialPageRoute(
+                            builder: (ctxt) => ModistaDesc(
+                              //itemName: 'NFP Blue & AB Jeans',
+                              username: 'usr57899',
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 200,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 222, 245, 255),
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 4,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        Image.asset(
-                          'assets/images/ab_jeans.png',
-                          width: 150,
-                          height: 150,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/images/nfp_blue.png',
+                              width: 150,
+                              height: 150,
+                            ),
+                            Image.asset(
+                              'assets/images/ab_jeans.png',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                  const Text(
-                    'By: usr57899',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Color.fromARGB(255, 45, 40, 40),
+                    const Text(
+                      'By: usr57899',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 45, 40, 40),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -221,7 +317,10 @@ class _MuseHomeState extends State<MuseHome> {
   }
 }
 
+
 class SignUpScreen extends StatelessWidget {
+  final TextEditingController fname = TextEditingController();
+  final TextEditingController lname = TextEditingController();
   @override
   Widget build(BuildContext ctxt) {
     return new Scaffold(
@@ -232,7 +331,24 @@ class SignUpScreen extends StatelessWidget {
         child: Column(
           children: [
             Text("Sign in here"),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: fname,
+                    decoration: InputDecoration(labelText: "First Name"),
+                  ),
+                ),
+                Expanded(
+                  child: TextField(
+                    controller: lname,
+                    decoration: InputDecoration(labelText: "Surname"),
+                  ),
+                ),
+              ],
+            ),
             Spacer(),
+            //Text($fname $lname),
             Padding(
               padding: EdgeInsets.only(bottom: 10.0),
               child: ElevatedButton(
