@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
+//import 'package:image_picker/image_picker.dart';
 
 Map<String, dynamic> signupInfo = {};
 
@@ -585,27 +585,27 @@ class _SignUpInfoState extends State<SignUpInfo> {
   final TextEditingController bio = TextEditingController();
   final TextEditingController pinterest = TextEditingController();
   final TextEditingController instagram = TextEditingController();
-  List<XFile>? wardrobeImages;
-  List<XFile>? stylePicsImages;
-  final ImagePicker _picker = ImagePicker();
+  // List<XFile>? wardrobeImages;
+  // List<XFile>? stylePicsImages;
+  // final ImagePicker _picker = ImagePicker();
 
-  Future<void> _pickWardrobeImages() async {
-    final List<XFile>? selectedImages = await _picker.pickMultiImage();
-    if (selectedImages != null) {
-      setState(() {
-        wardrobeImages = selectedImages;
-      });
-    }
-  }
+  // Future<void> _pickWardrobeImages() async {
+  //   final List<XFile>? selectedImages = await _picker.pickMultiImage();
+  //   if (selectedImages != null) {
+  //     setState(() {
+  //       wardrobeImages = selectedImages;
+  //     });
+  //   }
+  // }
 
-  Future<void> _pickStylePicsImages() async {
-    final List<XFile>? selectedImages = await _picker.pickMultiImage();
-    if (selectedImages != null) {
-      setState(() {
-        stylePicsImages = selectedImages;
-      });
-    }
-  }
+  // Future<void> _pickStylePicsImages() async {
+  //   final List<XFile>? selectedImages = await _picker.pickMultiImage();
+  //   if (selectedImages != null) {
+  //     setState(() {
+  //       stylePicsImages = selectedImages;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext ctxt) {
@@ -644,37 +644,37 @@ class _SignUpInfoState extends State<SignUpInfo> {
               ),
               SizedBox(height: 10),
 
-              // Wardrobe Images Uploader
-              ElevatedButton(
-                onPressed: _pickWardrobeImages,
-                child: Text("Upload Wardrobe Images"),
-              ),
-              wardrobeImages != null
-                  ? Wrap(
-                      spacing: 10,
-                      children: wardrobeImages!.map((file) {
-                        return Image.file(File(file.path),
-                            width: 100, height: 100);
-                      }).toList(),
-                    )
-                  : Text("No wardrobe images selected"),
+              // // Wardrobe Images Uploader
+              // ElevatedButton(
+              //   onPressed: _pickWardrobeImages,
+              //   child: Text("Upload Wardrobe Images"),
+              // ),
+              // wardrobeImages != null
+              //     ? Wrap(
+              //         spacing: 10,
+              //         children: wardrobeImages!.map((file) {
+              //           return Image.file(File(file.path),
+              //               width: 100, height: 100);
+              //         }).toList(),
+              //       )
+              //     : Text("No wardrobe images selected"),
 
-              SizedBox(height: 10),
+              // SizedBox(height: 10),
 
-              // Style Pics Images Uploader
-              ElevatedButton(
-                onPressed: _pickStylePicsImages,
-                child: Text("Upload Style Pics Images"),
-              ),
-              stylePicsImages != null
-                  ? Wrap(
-                      spacing: 10,
-                      children: stylePicsImages!.map((file) {
-                        return Image.file(File(file.path),
-                            width: 100, height: 100);
-                      }).toList(),
-                    )
-                  : Text("No style pics images selected"),
+              // // Style Pics Images Uploader
+              // ElevatedButton(
+              //   onPressed: _pickStylePicsImages,
+              //   child: Text("Upload Style Pics Images"),
+              // ),
+              // stylePicsImages != null
+              //     ? Wrap(
+              //         spacing: 10,
+              //         children: stylePicsImages!.map((file) {
+              //           return Image.file(File(file.path),
+              //               width: 100, height: 100);
+              //         }).toList(),
+              //       )
+              //     : Text("No style pics images selected"),
             ],
           ),
         ),
