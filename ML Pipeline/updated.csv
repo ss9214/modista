@@ -1,0 +1,44 @@
+Images,Category,subCategory,articleType,Color,Season,Usage,Gender,img_paths
+,Apparel,Tops,Strapless Top,Maroon,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_0
+,Apparel,Outerwear,Puffer Jacket,White,Winter,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_1
+,Apparel,Dresses,Mini Dress,Burgundy,Winter,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_2
+,Apparel,Sweaters,Sweater,Maroon,Winter,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_3
+,Apparel,Sweaters,Cardigan,Grey,Winter,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_4
+,Apparel,Dresses,Dress,Grey,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_5
+,Apparel,Tops,Top,Green,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_6
+,Apparel,Dresses,Maxi Dress,Green,Winter,Formal,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_7
+,Apparel,Sweaters,Turtleneck,Green,Winter,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_8
+,Apparel,Tops,Bodysuit,Purple,Winter,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_9
+,Apparel,Outerwear,Fur Jacket,Cream,Winter,Formal,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_10
+,Apparel,Sweaters,Cardigan,brown,Winter,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_11
+,Apparel,Dresses,Mini Dress,Black,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_12
+,Apparel,Tops,One Shoulder Top,Pink,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_13
+,Footwear,Heels,Heels,Burgundy,Summer,Semi Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_14
+,Apparel,Skirts,Mini Skirt,Black,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_15
+,Apparel,Skirts,Mini Skirt,silver,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_16
+,Apparel,Sweaters,Cropped Sweater,purple,Winter,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_17
+,Accessories,Head Accessories,Hat,brown,Winter,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_18
+,Apparel,Tops,Halter Top,blue,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_19
+,Apparel,Dresses,Mini Dress,mini dress,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_20
+,Apparel,Dresses,Mini Dress,red,Summer,Formal,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_21
+,Apparel,Skirts,Mini Skirt,black,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_22
+,Apparel,Dresses,Maxi Dress,maroon,Winter,Formal,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_23
+,Apparel,Skirts,Mini Skirt,green,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_24
+,Apparel,Tops,full sleeve top ,red,Winter,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_25
+,Footwear,Boots,Heeled Boots,black,Winter,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_26
+,Footwear,Boots,Short Boots,black,Winter,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_27
+,Apparel,Skirts,Maxi Skirt,pink,Winter,Semi Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_28
+,Apparel,Outerwear,Coat,red,Winter,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_29
+,Apparel,Tops,Strapless top,black,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_30
+,Apparel,Outerwear,Jacket,Grey,Winter,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_31
+,Footwear,Sneakers,Sneakers,Grey,Summer,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_32
+,Accessories,Bags,Purse,Black,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_33
+,Apparel,Shirt,full sleeve top ,Black,Winter,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_34
+,Apparel,Dress,Mini Dress,White,Summer,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_35
+,Footwear,Slippers,Home Slippers,Black,Winter,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_36
+,Accessories,Eyewear,Sunglasses,Orange,Summer,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_37
+,Accessories,Eyewear,Sunglasses,Brown,Summer,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_38
+,Apparel,Pants,Sweatpants,Black,Winter,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_39
+,Apparel,Pants,Sweatpants,Grey,Winter,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_40
+,Apparel,Pants,Sweatpants,Grey,Winter,Casual,Unisex,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_41
+,Apparel,Pants,Pants,Black,Winter,Casual,Female,/Users/alishasrivastava/Desktop/ML Pipeline/extracted_images/img_42
