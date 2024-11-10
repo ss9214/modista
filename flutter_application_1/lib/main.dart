@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
+
 // import 'package:image_picker/image_picker.dart';
+
 
 Map<String, dynamic> signupInfo = {};
 
@@ -595,7 +597,8 @@ class _SignUpInfoState extends State<SignUpInfo> {
                   // Add any other widgets here that are outside of the conditional block
               )
 
-              // Wardrobe Images Uploader
+
+              // // Wardrobe Images Uploader
               // ElevatedButton(
               //   onPressed: _pickWardrobeImages,
               //   child: Text("Upload Wardrobe Images"),
@@ -612,7 +615,9 @@ class _SignUpInfoState extends State<SignUpInfo> {
 
               // SizedBox(height: 10),
 
-              // Style Pics Images Uploader
+
+              // // Style Pics Images Uploader
+
               // ElevatedButton(
               //   onPressed: _pickStylePicsImages,
               //   child: Text("Upload Style Pics Images"),

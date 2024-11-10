@@ -42,9 +42,15 @@ def make_order():
         next_id = order["style_id"] + 1
     orders_collection.insert_one({"style_id":next_id,"modist":data["modist"],"muse":data["muse"],"price":data["price"]})
     
-
-def test():
-    return "test"
+@app.route("/api/get/modist-list",methods=['GET'])
+def get_modists():
+    database = client["modistdb"]
+    modists_collection = database["modists"]
+    cursor = modists_collection.find({})
+    modists = []
+    for modist in cursor:
+        modists.append(modist)
+    return {"Modists":modists}
 
 if __name__ == "__main__":
     app.run(debug=True,port=5000)
