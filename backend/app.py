@@ -12,9 +12,9 @@ def check_user():
     database = client["modistdb"]
     modists = database["modists"]
     muses = database["muses"]
-    if muses.find({"email":email}):
+    if muses.find_one({"email":email}):
         response = {"data": True,"user":"Muse"}
-    elif modists.find({"email":email}):
+    elif modists.find_one({"email":email}):
         response = {"data": True,"user":"Modist"}
     else:
         response = {"data": False,"user":"None"}
